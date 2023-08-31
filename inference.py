@@ -78,8 +78,8 @@ def main(args):
     # for sig in ([0.9]):
     name = [median_blur(kernel_size= 5), SaltAndPepper(ratio=0.1), random_brightness(a=0.8, b=1.2), 
             random_contrast(a = 0.8 , b= 1.2), random_saturation(a = 0.8, b=1.2), random_hue(a = -0.1, b = 0.1)]
-    for i in range(6):
-        donoisy = name[i]
+    for noi in range(6):
+        donoisy = name[noi]
         bar= []
         ssim = []
         psnr = []
@@ -141,7 +141,7 @@ def main(args):
                     # random 
 
 
-                    setgo = donoisy(stego)
+                    stego = donoisy(stego)
                     # stego = jp(stego.cpu())
                     # stego = br(stego)
 

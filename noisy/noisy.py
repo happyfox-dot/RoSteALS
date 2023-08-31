@@ -47,13 +47,13 @@ class median_blur(nn.Module):
         return self.aug(input_image)
     
 
-class salt_and_pepper(nn.Module):
-    def __init__(self, ratio = 0.1):
-        super().__init__()
-        self.ratio = ratio 
-        self.aug = SaltAndPepper(ratio=self.ratio )
-    def forward(self, input_image):
-        return self.aug(input_image)
+# class salt_and_pepper(nn.Module):
+#     def __init__(self, ratio = 0.1):
+#         super().__init__()
+#         self.ratio = ratio 
+#         self.aug = SaltAndPepper(ratio=self.ratio )
+#     def forward(self, input_image):
+#         return self.aug(input_image)
     
 class random_brightness(nn.Module):
     def __init__(self, a, b):
@@ -63,7 +63,8 @@ class random_brightness(nn.Module):
         self.aug = RandomBrightness(brightness=(self.a, self.b ), p = 1.)
     
     def forward(self, input_image):
-        return self.aug(input_image)
+        input_image = self.aug(input_image)
+        return input_image
     
 class random_contrast(nn.Module):
     def __init__(self,a ,b):
@@ -72,7 +73,8 @@ class random_contrast(nn.Module):
         self.b = b
         self.aug = RandomContrast(contrast=(self.a, self.b ), p = 1.)
     def forward(self, input_image):
-        return self.aug(input_image)
+        input_image = self.aug(input_image)
+        return input_image
     
 class random_saturation(nn.Module):
     def __init__(self, a, b):
@@ -82,7 +84,8 @@ class random_saturation(nn.Module):
         self.aug = RandomSaturation(saturation= (self.a, self.b ), p= 1.)
 
     def forward(self, input_image):
-        return self.aug(input_image)
+        input_image = self.aug(input_image)
+        return input_image
     
 class random_hue(nn.Module):
     def __init__(self,a ,b):
@@ -92,7 +95,8 @@ class random_hue(nn.Module):
         self.aug = RandomHue(hue =(self.a,self.b ), p = 1.)
 
     def forward(self, input_image):
-        return self.aug(input_image)
+        input_image = self.aug(input_image)
+        return input_image
 
         
 
