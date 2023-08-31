@@ -273,8 +273,9 @@ def test_bch():
         text_recon = bch.decode_text(encode)[0]
         assert text==text_recon
     
-    check('secrets', 137, 5, 100)
-    check('some secret', 285, 10, 160)
+    check('secrets', 137, 5, 100) # 7 * 8 = 56
+    check('some secret', 285, 10, 160) #  
+    # check('1',)
 
 if __name__ == '__main__':
     test_ecc()

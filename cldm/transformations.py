@@ -23,7 +23,8 @@ class TransformNet(nn.Module):
         self.register_buffer('step0', torch.tensor(0))  # large number
         if imagenetc_level > 0:
             self.imagenetc = ImagenetCTransform(max_severity=imagenetc_level)
-    
+        # print(f'{do_jpeg}, {jpeg_quality}')
+
     def activate(self, global_step):
         if self.step0 == 0:
             print(f'[TRAINING] Activating TransformNet at step {global_step}')

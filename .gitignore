@@ -1,3 +1,4 @@
+# in this file , you can add some file which is not needed to upload 
 .idea/
 
 training/
@@ -141,3 +142,5 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+watermarking_image/*
