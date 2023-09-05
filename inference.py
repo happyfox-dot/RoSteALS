@@ -19,6 +19,7 @@ import random
 from noisy.Jpeg import Jpeg 
 from noisy.salt_and_papper import SaltAndPepper
 from noisy.noisy import GaussainBluer, GaussainNoisy, tResize, random_brightness,random_hue, random_contrast,random_saturation,median_blur
+from noisy.random_rst import RandomRST
 
 # def unormalize(x):
 #     # convert x in range [-1, 1], (B,C,H,W), tensor to [0, 255], uint8, numpy, (B,H,W,C)
@@ -29,7 +30,7 @@ photo_path = r'/mnt/chengxin/Datasets/DUTS/DUTS-TE/Std-Image-30/'
 random.seed(42)
 
 def main(args):
-    os.environ['CUDA_VISIBLE_DEVICES'] = '2'
+    os.environ['CUDA_VISIBLE_DEVICES'] = '1'
     if torch.cuda.is_available():
         device = torch.device('cuda')
     else:
@@ -72,17 +73,19 @@ def main(args):
     # jp = Jpeg(factor=90)
     # for quality in ([10, 30 , 50, 70, 90]):
         # jp  = Jpeg(factor=quality)
+    for _ in range(1):
     # for sig in ([0.1, 0.5, 1.0, 1.5, 2.0, 2.5, 3.0]): # kernel_default= 7 
     # for sig in ([0.01, 0.02, 0.03, 0.04, 0.05]):
     # for sig in ([0.5, 0.75, 0.9, 1., 1.25, 1.5, 2.0]):
     # for sig in ([0.9]):
-    name = [median_blur(kernel_size= 5), SaltAndPepper(ratio=0.1), random_brightness(a=0.8, b=1.2), 
-            random_contrast(a = 0.8 , b= 1.2), random_saturation(a = 0.8, b=1.2), random_hue(a = -0.1, b = 0.1)]
-    for noi in range(6):
-        donoisy = name[noi]
+    # name = [median_blur(kernel_size= 5), SaltAndPepper(ratio=0.1), random_brightness(a=0.8, b=1.2), 
+    #         random_contrast(a = 0.8 , b= 1.2), random_saturation(a = 0.8, b=1.2), random_hue(a = -0.1, b = 0.1)]
+    # for noi in range(6):
+        # donoisy = name[noi]
         bar= []
         ssim = []
         psnr = []
+        rst = RandomRST()
         # br = GaussainBluer(kernel_size= 7 , sigma= sig )
         # br = GaussainNoisy(mean = 0 , std = sig)
         # br = tResize(resize_ratio= sig)
@@ -141,9 +144,10 @@ def main(args):
                     # random 
 
 
-                    stego = donoisy(stego)
+                    # stego = donoisy(stego)
                     # stego = jp(stego.cpu())
                     # stego = br(stego)
+                    stego = rst(stego)
 
 
 
@@ -170,7 +174,7 @@ def main(args):
                     # break
                     # print(f'Stego saved to {source_image}')
         # print(f'sigma is :{sig}')
-        print(f'Jpeg , quality = {donoisy}')
+        # print(f'Jpeg , quality = {donoisy}')
         print(f'mean psnr is :{np.mean(psnr)}')
 
         print(f'mean ssim is :{np.mean(ssim)}')

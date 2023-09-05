@@ -51,7 +51,7 @@ model:
     noise_config:
       target: cldm.transformations.TransformNet
       params:
-        do_jpeg: True
+        do_jpeg: False 
         ramp: 10000
         imagenetc_level: 5
 

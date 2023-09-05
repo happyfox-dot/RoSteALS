@@ -292,7 +292,7 @@ class Jpeg(nn.Module):
         print()
         self.factor=float(factor)
         
-        self.device=torch.device('cuda') if torch.cuda.is_available() else torch.device('cpu')
+        self.device= torch.device('cpu')
     def forward(self, input_image):
         input_image = jpeg_compress_decompress(input_image,factor= quality_to_factor(self.factor))
         return torch.FloatTensor(input_image).to(self.device)
